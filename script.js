@@ -8,15 +8,20 @@
 var jogador = 1;
 
 function hello (n){ 
+
     var casa_escolhida = document.getElementById("casa" + n);
     var symbol = casa_escolhida.style.backgroundImage;
     
     if(jogador == 1 && symbol == ''){
         casa_escolhida.style.backgroundImage = "url('https://static.vecteezy.com/system/resources/previews/001/192/291/original/circle-png.png')";
+        verify_victory ();
+        show_victory ();
         jogador++; 
     }
     else if(jogador == 2 && symbol == ''){
         casa_escolhida.style.backgroundImage = "url('https://icones.pro/wp-content/uploads/2021/08/icone-x-noir.png')";
+        verify_victory ();
+        show_victory ();
         jogador--;
     }
     else {
@@ -25,8 +30,6 @@ function hello (n){
     }
     
     let turno = document.getElementById('vez-jogador').innerHTML = "Movimento do jogador " + jogador;
-    verify_victory ();
-    show_victory ();
 }
 
 function verify_victory () {
@@ -42,49 +45,41 @@ function verify_victory () {
     
     if (bg1 != '' && bg2 != '' && bg3 != ''){
         if (bg1 == bg2 && bg1 == bg3 && bg2 == bg3){
-            console.log('bruh');
             return 1;
         }    
     }
     if (bg4 != '' && bg5 != '' && bg6 != ''){
         if (bg4 == bg5 && bg4 == bg6 && bg5 == bg6){
-            console.log('bruh');
             return 1;
         }
     }
     if (bg7 != '' && bg8 != '' && bg9 != ''){
         if (bg7 == bg8 && bg7 == bg9 && bg8 == bg9){
-            console.log('bruh');
             return 1;
         }
     }
     if (bg1 != '' && bg4 != '' && bg7 != ''){
         if (bg1 == bg4 && bg1 == bg7 && bg4 == bg7){
-            console.log('bruh');
             return 1;
         }
     }
     if (bg2 != '' && bg5 != '' && bg8 != ''){
         if (bg2 == bg5 && bg2 == bg8 && bg5 == bg8){
-            console.log('bruh');
             return 1;
         }
     }
     if (bg3 != '' && bg6 != '' && bg9 != ''){
         if (bg3 == bg6 && bg3 == bg9 && bg6 == bg9){
-            console.log('bruh');
             return 1;
         }
     }
     if (bg1 != '' && bg5 != '' && bg9 != ''){
         if (bg1 == bg5 && bg1 == bg9 && bg5 == bg9){
-            console.log('bruh');
             return 1;
         }
     }
     if (bg3 != '' && bg5 != '' && bg7 != ''){
         if(bg3 == bg5 && bg3 == bg7 && bg5 == bg7){
-            console.log('bruh');
             return 1;
         }
     }
@@ -93,6 +88,8 @@ function verify_victory () {
     }
 }
 
+var ponto1 = 1;
+var ponto2 = 1;
 function show_victory (){
     var text = document.createTextNode("O vencedor é o jogador " + jogador);
     var empatou = document.createTextNode("Empate, tenta outra vez  ");
@@ -104,6 +101,14 @@ function show_victory (){
         titulo.appendChild(text);
         for (var i = 0; i < casas.length;i++){
             casas[i].style.pointerEvents = 'none';
+        }
+        if (jogador == 1){
+            document.getElementById('pontuacao-jogador1').innerHTML = "Pontuação do jogador 1: " + ponto1;
+            ponto1++;
+        }
+        else if (jogador == 2){
+            document.getElementById('pontuacao-jogador2').innerHTML = "Pontuação do jogador 2: " + ponto2;
+            ponto2++;
         }
     }
     else if (verify_victory() == 0){
@@ -126,7 +131,15 @@ function retry (){
     titulo.innerHTML = '';
 
     var casas = document.getElementsByClassName('casa');        
-    for (var y = 0; y < casas.length;y++){
+    for (var y = 0; y < casas.length; y++){
         casas[y].style.pointerEvents = 'auto';
     }
 }   
+
+function reset (){
+    ponto1 = 1;
+    ponto2 = 1;
+
+    document.getElementById('pontuacao-jogador1').innerHTML = "Pontuação do jogador 1:";
+    document.getElementById('pontuacao-jogador2').innerHTML = "pontuação do jogador 2:";
+}

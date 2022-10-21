@@ -49,47 +49,84 @@ function verify_victory () {
     if (bg4 != '' && bg5 != '' && bg6 != ''){
         if (bg4 == bg5 && bg4 == bg6 && bg5 == bg6){
             console.log('bruh');
+            return 1;
         }
     }
     if (bg7 != '' && bg8 != '' && bg9 != ''){
         if (bg7 == bg8 && bg7 == bg9 && bg8 == bg9){
             console.log('bruh');
+            return 1;
         }
     }
     if (bg1 != '' && bg4 != '' && bg7 != ''){
         if (bg1 == bg4 && bg1 == bg7 && bg4 == bg7){
             console.log('bruh');
+            return 1;
         }
     }
     if (bg2 != '' && bg5 != '' && bg8 != ''){
         if (bg2 == bg5 && bg2 == bg8 && bg5 == bg8){
             console.log('bruh');
+            return 1;
         }
     }
     if (bg3 != '' && bg6 != '' && bg9 != ''){
         if (bg3 == bg6 && bg3 == bg9 && bg6 == bg9){
             console.log('bruh');
+            return 1;
         }
     }
     if (bg1 != '' && bg5 != '' && bg9 != ''){
         if (bg1 == bg5 && bg1 == bg9 && bg5 == bg9){
             console.log('bruh');
+            return 1;
         }
     }
     if (bg3 != '' && bg5 != '' && bg7 != ''){
         if(bg3 == bg5 && bg3 == bg7 && bg5 == bg7){
             console.log('bruh');
+            return 1;
         }
+    }
+    if (bg1 != '' && bg2 != '' && bg3 != '' && bg4 != '' && bg5 != '' && bg6 != '' && bg7 != '' && bg8 != '' && bg9 != '') {
+        return 0;
     }
 }
 
 function show_victory (){
     var text = document.createTextNode("O vencedor é o jogador " + jogador);
+    var empatou = document.createTextNode("Empate, tenta outra vez  ");
     var titulo = document.getElementById('show_result');
-    
+
     var casas = document.getElementsByClassName('casa');
 
     if (verify_victory() == 1){
         titulo.appendChild(text);
+        for (var i = 0; i < casas.length;i++){
+            casas[i].style.pointerEvents = 'none';
+        }
+    }
+    else if (verify_victory() == 0){
+        titulo.appendChild(empatou);
     }
 }
+
+function retry (){
+    var bg1 = document.getElementById('casa1').style.backgroundImage = '';
+    var bg2 = document.getElementById('casa2').style.backgroundImage = '';
+    var bg3 = document.getElementById('casa3').style.backgroundImage = '';
+    var bg4 = document.getElementById('casa4').style.backgroundImage = '';
+    var bg5 = document.getElementById('casa5').style.backgroundImage = '';
+    var bg6 = document.getElementById('casa6').style.backgroundImage = '';
+    var bg7 = document.getElementById('casa7').style.backgroundImage = '';
+    var bg8 = document.getElementById('casa8').style.backgroundImage = '';
+    var bg9 = document.getElementById('casa9').style.backgroundImage = '';
+    
+    var titulo = document.getElementById('show_result');
+    titulo.innerHTML = '';
+
+    var casas = document.getElementsByClassName('casa');        
+    for (var y = 0; y < casas.length;y++){
+        casas[y].style.pointerEvents = 'auto';
+    }
+}   
